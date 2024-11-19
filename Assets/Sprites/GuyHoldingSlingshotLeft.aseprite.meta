@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 49a741fec9dba5d4c8f3fafd9dab3256
+guid: 61a2f226c204ab24eb85489b3612d0fa
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,18 +121,18 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Slingshot
+  - name: GuyHoldingSlingshotLeft
     originalName: 
-    pivot: {x: 0.45454547, y: -0.5714286}
+    pivot: {x: 0.5, y: 0}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 11
-      height: 14
-    spriteID: 3e38411690820784abd9f2e3620ec523
+      width: 27
+      height: 35
+    spriteID: 107b299e047a6e740a0db654f595ce71
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,25 +144,25 @@ ScriptedImporter:
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 738682063
-    name: Slingshot
+    guid: 1121508036
+    name: GuyHoldingSlingshotLeft
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Slingshot
+    - name: GuyHoldingSlingshotLeft
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 11
-        y: 8
-        width: 11
-        height: 14
-      spriteId: 3e38411690820784abd9f2e3620ec523
+        x: 0
+        y: 0
+        width: 27
+        height: 35
+      spriteId: 107b299e047a6e740a0db654f595ce71
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 32, y: 32}
+  canvasSize: {x: 27, y: 35}
