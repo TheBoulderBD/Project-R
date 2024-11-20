@@ -8,7 +8,7 @@ public class EnemyScript : MonoBehaviour
     public Transform target;
     private float minDistance = 5.0f;
     private bool targetCollision = false;
-    private float speed = 2.0f;
+    private float speed = 1.0f;
     private float thrust = 1.5f;
     public float health = 5;
     private int hitStrength = 10;
