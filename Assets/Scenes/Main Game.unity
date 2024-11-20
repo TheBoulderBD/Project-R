@@ -19857,7 +19857,7 @@ GameObject:
   - component: {fileID: 483348517}
   m_Layer: 0
   m_Name: LaunchPoint
-  m_TagString: Untagged
+  m_TagString: FriendlyProjectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -19871,9 +19871,9 @@ Transform:
   m_GameObject: {fileID: 483348516}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.083, y: 0.074, z: -0.014663218}
-  m_LocalScale: {x: 0.33333334, y: 0.33333334, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: 0, y: 0.077, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 627573508}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -20145,7 +20145,6 @@ GameObject:
   - component: {fileID: 627573506}
   - component: {fileID: 627573510}
   - component: {fileID: 627573511}
-  - component: {fileID: 627573513}
   - component: {fileID: 627573512}
   m_Layer: 0
   m_Name: Player
@@ -20306,6 +20305,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77b728044cefa474ba0f10ee39bb0c79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectilePrefab: {fileID: 3546080650516181931, guid: 6414c38cee23b544c9a8f9933c1e49a7, type: 3}
+  launchPoint: {fileID: 483348517}
+  projectileSpeed: 3
+  projectileLifetime: 1
+  shootCooldown: 0.1
 --- !u!95 &627573512
 Animator:
   serializedVersion: 5
@@ -20327,21 +20331,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &627573513
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 627573505}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 794a4bc5c0eb15344b9c19eb8fb735d7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  projectilePrefab: {fileID: 3546080650516181931, guid: 6414c38cee23b544c9a8f9933c1e49a7, type: 3}
-  launchPoint: {fileID: 483348517}
-  projectileSpeed: 30
 --- !u!1 &690821627
 GameObject:
   m_ObjectHideFlags: 0
