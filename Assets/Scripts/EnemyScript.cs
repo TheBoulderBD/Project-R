@@ -60,39 +60,23 @@ public class EnemyScript : MonoBehaviour
             Invoke("FalseCollision", 0.5f);
         }
     }
+    public void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.CompareTag("FriendlyProjectile"))
+        {
+            health -= collision.gameObject.GetComponent<PlayerScript>().GetProjectileDamage();
+            Destroy(collision.gameObject);
+            if (health < 1)
+            {
+                Destroy(gameObject);
+            }
+        }
+    }
 
     void FalseCollision()
     {
         targetCollision = false;
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-    }
-
-    public void TakeDamage(float amount)
-    {
-        health -= amount;
-        if (health < 0)
-        {
-            isDead = true;
-            GetComponent<Rigidbody2D>().velocity = Vector3.zero;
-            GetComponent<SpriteRenderer>().sprite = deathSprite;
-            GetComponent<SpriteRenderer>().sortingOrder = -1;
-            GetComponent<Collider2D>().enabled = false;
-            transform.GetChild(0).gameObject.SetActive(false);
-        }
-        else
-        {
-            transform.GetChild(0).gameObject.SetActive(true);
-        }
-    }
-
-    void HideBlood()
-    {
-        transform.GetChild(0).gameObject.SetActive(false);
-    }
-
-    void EnemyDeath()
-    {
-        Destroy(gameObject);
     }
 
     public int GetHitStrength()

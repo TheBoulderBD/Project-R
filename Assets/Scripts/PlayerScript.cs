@@ -13,6 +13,7 @@ public class PlayerScript : MonoBehaviour
 
     public GameObject projectilePrefab;  // The projectile prefab
     public Transform launchPoint;        // The point from where the projectile is launched
+    public float projectileDamage = 1f; // Damage of the projectile
     public float projectileSpeed = 1f;   // Speed of the projectile
     public float projectileLifetime = 1f; // Time before the projectile disappears
     public float shootCooldown = 0.2f;     // Cooldown time between shots in seconds
@@ -127,6 +128,10 @@ public class PlayerScript : MonoBehaviour
         currentCooldown = shootCooldown;
     }
 
+    public float GetProjectileDamage()
+    {
+        return projectileDamage;
+    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -135,6 +140,7 @@ public class PlayerScript : MonoBehaviour
             health -= collision.gameObject.GetComponent<EnemyScript>().GetHitStrength();
             if (health < 1)
             {
+                Debug.LogError("HIT");
                 // Handle death logic here
             }
         }
