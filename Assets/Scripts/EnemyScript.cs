@@ -14,8 +14,12 @@ public class EnemyScript : MonoBehaviour
     private int hitStrength = 10;
 
     public Sprite deathSprite;
-
     private bool isDead = false;
+
+    // Parameters for separation
+    public float separationRadius = 1.0f; // Distance to maintain from other enemies
+    public float separationStrength = 0.5f; // How strongly to avoid others
+
     void Start()
     {
         target = GameObject.Find("Player").transform;
@@ -23,20 +27,45 @@ public class EnemyScript : MonoBehaviour
 
     void Update()
     {
-        range = Vector2.Distance(transform.position, target.position);
-        if (range < minDistance && !isDead)
-        {
-            if (!targetCollision)
-            {
-                // Get the position of the player
-                transform.LookAt(target.position);
+        if (isDead) return;
 
-                // Correct the rotation
-                transform.Rotate(new Vector3(0, -90, 0), Space.Self);
-                transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+        // Calculate distance to the player
+        range = Vector2.Distance(transform.position, target.position);
+
+        if (range < minDistance && !targetCollision)
+        {
+            // Move toward the player
+            Vector3 direction = (target.position - transform.position).normalized;
+
+            // Apply separation
+            Vector3 separation = GetSeparationVector();
+            direction += separation * separationStrength;
+
+            transform.Translate(direction * speed * Time.deltaTime, Space.World);
+        }
+
+        // Reset rotation (optional to keep sprites upright)
+        transform.rotation = Quaternion.identity;
+    }
+
+    private Vector3 GetSeparationVector()
+    {
+        Vector3 separation = Vector3.zero;
+
+        // Find all nearby enemies
+        Collider2D[] nearbyEnemies = Physics2D.OverlapCircleAll(transform.position, separationRadius);
+
+        foreach (Collider2D collider in nearbyEnemies)
+        {
+            if (collider != null && collider.gameObject != gameObject && collider.CompareTag("Enemy"))
+            {
+                // Calculate the repulsion vector
+                Vector3 repulsion = transform.position - collider.transform.position;
+                separation += repulsion.normalized / repulsion.magnitude; // Normalize and weight by distance
             }
         }
-        transform.rotation = Quaternion.identity;
+
+        return separation;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -57,9 +86,11 @@ public class EnemyScript : MonoBehaviour
             if (left) GetComponent<Rigidbody2D>().AddForce(-transform.right * thrust, ForceMode2D.Impulse);
             if (top) GetComponent<Rigidbody2D>().AddForce(transform.up * thrust, ForceMode2D.Impulse);
             if (bottom) GetComponent<Rigidbody2D>().AddForce(-transform.up * thrust, ForceMode2D.Impulse);
+
             Invoke("FalseCollision", 0.5f);
         }
     }
+
     public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("FriendlyProjectile"))
@@ -72,6 +103,7 @@ public class EnemyScript : MonoBehaviour
             }
         }
     }
+
 
     void FalseCollision()
     {
