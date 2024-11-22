@@ -5,14 +5,13 @@ public class PlayerScript : MonoBehaviour
 {
     private float horizontal;
     private float vertical;
-    private float speed = 2.0f;
     private Rigidbody2D rb;
-
-    private float health = 200;
-    private float startHealth;
 
     public GameObject projectilePrefab;  // The projectile prefab
     public Transform launchPoint;        // The point from where the projectile is launched
+
+    public float playerSpeed = 2.0f;
+    public float playerHealth = 200; // playerHealth of the player
     public float projectileDamage = 1f; // Damage of the projectile
     public float projectileSpeed = 1f;   // Speed of the projectile
     public float projectileLifetime = 1f; // Time before the projectile disappears
@@ -25,7 +24,6 @@ public class PlayerScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
-        startHealth = health;
     }
 
     void Update()
@@ -34,7 +32,7 @@ public class PlayerScript : MonoBehaviour
         vertical = Input.GetAxisRaw("Vertical");
 
         // Movement logic
-        rb.velocity = new Vector2(horizontal * speed, vertical * speed);
+        rb.velocity = new Vector2(horizontal * playerSpeed, vertical * playerSpeed);
 
         // Only play movement animations if player is not shooting
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ShootRight") &&
@@ -133,12 +131,67 @@ public class PlayerScript : MonoBehaviour
         return projectileDamage;
     }
 
+    public void SetProjectileDamage(float damage)
+    {
+        projectileDamage = damage;
+    }
+
+    public float GetPlayerHealth()
+    {
+        return playerHealth;
+    }
+
+    public void SetPlayerHealth(float health)
+    {
+        playerHealth = health;
+    }
+
+    public float GetPlayerSpeed()
+    {
+        return playerSpeed;
+    }
+
+    public void SetPlayerSpeed(float playSpeed)
+    {
+        playerSpeed = playSpeed;
+    }
+
+    public float GetShootCooldown()
+    {
+        return shootCooldown;
+    }
+
+    public void SetShootCooldown(float cooldown)
+    {
+        shootCooldown = cooldown;
+    }
+
+    public float GetProjectileSpeed()
+    {
+        return projectileSpeed;
+    }
+
+    public void SetProjectileSpeed(float projSpeed)
+    {
+        projectileSpeed = projSpeed;
+    }
+
+    public float GetProjectileLifetime()
+    {
+        return projectileLifetime;
+    }
+
+    public void SetProjectileLifetime(float lifetime)
+    {
+        projectileLifetime = lifetime;
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            health -= collision.gameObject.GetComponent<EnemyScript>().GetHitStrength();
-            if (health < 1)
+            playerHealth -= collision.gameObject.GetComponent<EnemyScript>().GetHitStrength();
+            if (playerHealth < 1)
             {
                 Debug.LogError("HIT");
                 // Handle death logic here
