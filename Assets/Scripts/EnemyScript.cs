@@ -20,9 +20,18 @@ public class EnemyScript : MonoBehaviour
     public float separationRadius = 1.0f; // Distance to maintain from other enemies
     public float separationStrength = 0.5f; // How strongly to avoid others
 
+    private AudioSource deathNoise;
+    private BoxCollider2D boxCollider;
+    private SpriteRenderer spriteRenderer;
+    private Rigidbody2D rb;
+
     void Start()
     {
         target = GameObject.Find("Player").transform;
+        deathNoise = GetComponent<AudioSource>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        boxCollider = GetComponent<BoxCollider2D>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     void Update()
@@ -99,7 +108,13 @@ public class EnemyScript : MonoBehaviour
             Destroy(collision.gameObject);
             if (health < 1)
             {
-                Destroy(gameObject);
+                isDead = true;
+                spriteRenderer.sprite = deathSprite;
+                deathNoise.Play();
+                rb.velocity = Vector2.zero;
+                rb.isKinematic = true;
+                boxCollider.enabled = false;
+                Invoke("DestroyEnemy", deathNoise.clip.length);
             }
         }
     }
@@ -114,5 +129,10 @@ public class EnemyScript : MonoBehaviour
     public int GetHitStrength()
     {
         return hitStrength;
+    }
+
+    void DestroyEnemy()
+    {
+        Destroy(gameObject);
     }
 }

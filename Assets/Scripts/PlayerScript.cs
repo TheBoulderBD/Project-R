@@ -17,6 +17,9 @@ public class PlayerScript : MonoBehaviour
     public float projectileLifetime = 1f; // Time before the projectile disappears
     public float shootCooldown = 0.2f;     // Cooldown time between shots in seconds
 
+    public AudioSource footstep;
+    public AudioSource shooting;
+
     private float currentCooldown = 0f;  // Tracks current cooldown timer
     private Animator animator;
 
@@ -24,6 +27,8 @@ public class PlayerScript : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+        footstep = GetComponent<AudioSource>();
+        shooting = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -43,22 +48,27 @@ public class PlayerScript : MonoBehaviour
             // Play movement animations
             if (horizontal > 0)
             {
+                footstep.enabled = true;
                 animator.Play("Right");
             }
             else if (horizontal < 0)
             {
+                footstep.enabled = true;
                 animator.Play("Left");
             }
             else if (vertical > 0)
             {
+                footstep.enabled = true;
                 animator.Play("Up");
             }
             else if (vertical < 0)
             {
+                footstep.enabled = true;
                 animator.Play("Down");
             }
             else if (horizontal == 0 && vertical == 0)
             {
+                footstep.enabled = false;
                 animator.Play("Idle");
             }
         }
@@ -67,6 +77,8 @@ public class PlayerScript : MonoBehaviour
         if (Input.GetMouseButton(0) && currentCooldown <= 0f)
         {
             FireProjectile();
+            shooting.enabled = true;
+            shooting.Play();
             currentCooldown = shootCooldown;  // Reset cooldown after shooting
         }
 
