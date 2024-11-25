@@ -141,6 +141,7 @@ public class PlayerScript : MonoBehaviour
             if (health < 1)
             {
                 Debug.LogError("HIT");
+                Debug.Log(health);
                 // Handle death logic here
             }
         }
