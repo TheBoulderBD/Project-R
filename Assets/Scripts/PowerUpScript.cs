@@ -65,7 +65,7 @@ public class PowerUp : MonoBehaviour
                     playerScript.SetPlayerSpeed(playerScript.GetPlayerSpeed() + 1f);
                     break;
                 case PowerUpType.IncreasePlayerHealth:
-                    playerScript.SetPlayerHealth(playerScript.GetPlayerHealth() + 10f);
+                    playerScript.SetPlayerHealth(playerScript.GetPlayerHealth() + 10);
                     break;
                 case PowerUpType.IncreaseProjectileSpeed:
                     playerScript.SetProjectileSpeed(playerScript.GetProjectileSpeed() + 1f);

@@ -11,9 +11,9 @@ public class PlayerScript : MonoBehaviour
     public Transform launchPoint;        // The point from where the projectile is launched
 
     public float playerSpeed = 2.0f;
-    public float playerHealth; // playerHealth of the player
-    public float maxHealth = 50;
-    public Image healthBar;
+    public int playerHealth; // playerHealth of the player
+    public int maxHealth = 100;
+    public HealthBar healthBar;
     public float projectileDamage = 1f; // Damage of the projectile
     public float projectileSpeed = 1f;   // Speed of the projectile
     public float projectileLifetime = 1f; // Time before the projectile disappears
@@ -28,6 +28,8 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         playerHealth = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
+
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         footstep = GetComponent<AudioSource>();
@@ -36,14 +38,13 @@ public class PlayerScript : MonoBehaviour
 
     void Update()
     {
-        healthBar.fillAmount = Mathf.Clamp(playerHealth / maxHealth, 0, 1);
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
         // Movement logic
         rb.velocity = new Vector2(horizontal * playerSpeed, vertical * playerSpeed);
 
-        //Health can't pass max health
+        healthBar.setHealth(playerHealth);
 
         // Only play movement animations if player is not shooting
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ShootRight") &&
@@ -154,12 +155,12 @@ public class PlayerScript : MonoBehaviour
         projectileDamage = damage;
     }
 
-    public float GetPlayerHealth()
+    public int GetPlayerHealth()
     {
         return playerHealth;
     }
 
-    public void SetPlayerHealth(float health)
+    public void SetPlayerHealth(int health)
     {
         playerHealth = health;
     }
@@ -204,11 +205,19 @@ public class PlayerScript : MonoBehaviour
         projectileLifetime = lifetime;
     }
 
+    public void TakeDamage(int damage)
+    {
+        playerHealth -= damage;
+
+        healthBar.setHealth(playerHealth);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
             playerHealth -= collision.gameObject.GetComponent<EnemyScript>().GetHitStrength();
+            
             if (playerHealth < 1)
             {
                 Debug.LogError("HIT");
