@@ -7,6 +7,8 @@ TagManager:
   - Enemy
   - FriendlyProjectile
   - Boss
+  - BossProjectile
+  - Wall
   layers:
   - Default
   - TransparentFX
@@ -14,10 +16,10 @@ TagManager:
   - 
   - Water
   - UI
-  - 
-  - 
-  - 
-  - 
+  - Player
+  - Boss
+  - Orb
+  - Wall
   - 
   - 
   - 

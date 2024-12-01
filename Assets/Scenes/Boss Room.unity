@@ -310,7 +310,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 330819193}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: LaunchPoint
   m_TagString: FriendlyProjectile
   m_Icon: {fileID: 0}
@@ -563,7 +563,7 @@ GameObject:
   - component: {fileID: 584644010}
   - component: {fileID: 584644004}
   - component: {fileID: 584644011}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Boss
   m_TagString: Boss
   m_Icon: {fileID: 0}
@@ -826,6 +826,8 @@ MonoBehaviour:
   deathSprite: {fileID: 8915095006512376559, guid: 4c2b7b0ff0207ff4c933b1b4b715019f, type: 3}
   separationRadius: 1
   separationStrength: 0.5
+  orbPrefab: {fileID: 4049447724857106697, guid: 0622fcc44723c534ea850e6b91ec7883, type: 3}
+  orbCooldown: 5
 --- !u!95 &584644011
 Animator:
   serializedVersion: 5
@@ -36472,7 +36474,7 @@ GameObject:
   - component: {fileID: 1557253610}
   - component: {fileID: 1557253609}
   - component: {fileID: 1557253608}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -37123,9 +37125,9 @@ GameObject:
   - component: {fileID: 2063197427}
   - component: {fileID: 2063197426}
   - component: {fileID: 2063197425}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Walls
-  m_TagString: Untagged
+  m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
