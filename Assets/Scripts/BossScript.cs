@@ -27,6 +27,10 @@ public class BossScript : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Rigidbody2D rb;
 
+    public GameObject orbPrefab; // Assign your orb prefab here
+    public float orbCooldown = 5f; // Time between firing orbs
+    private float orbTimer = 0f;
+
     void Start()
     {
         target = GameObject.Find("Player").transform;
@@ -62,6 +66,14 @@ public class BossScript : MonoBehaviour
 
         // Reset rotation (optional to keep sprites upright)
         transform.rotation = Quaternion.identity;
+
+        orbTimer += Time.deltaTime;
+
+        if (orbTimer >= orbCooldown)
+        {
+            FireOrbsInAllDirections();
+            orbTimer = 0f;
+        }
     }
 
     private Vector3 GetSeparationVector()
@@ -126,6 +138,19 @@ public class BossScript : MonoBehaviour
         }
     }
 
+    void FireOrbsInAllDirections()
+    {
+        int orbCount = 8; // Number of directions to fire orbs
+        for (int i = 0; i < orbCount; i++)
+        {
+            float angle = i * (360f / orbCount);
+            Vector2 direction = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
+
+            // Instantiate the orb and initialize its direction
+            GameObject orb = Instantiate(orbPrefab, transform.position, Quaternion.identity);
+            orb.GetComponent<OrbProjectile>().Initialize(direction);
+        }
+    }
 
     void FalseCollision()
     {
