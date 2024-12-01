@@ -10,8 +10,10 @@ public class BossScript : MonoBehaviour
     private bool targetCollision = false;
     public float speed = 1.0f;
     private float thrust = 1.5f;
-    public float health = 5;
+    public int maxHealth = 500;
+    public int health;
     public int hitStrength = 30;
+    public HealthBar healthBar;
 
     public Sprite deathSprite;
     private bool isDead = false;
@@ -32,10 +34,15 @@ public class BossScript : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         boxCollider = GetComponent<BoxCollider2D>();
         rb = GetComponent<Rigidbody2D>();
+
+        health = maxHealth;
+        healthBar.SetMaxHealth(maxHealth);
     }
 
     void Update()
     {
+        healthBar.setHealth(health);
+
         if (isDead) return;
 
         // Calculate distance to the player

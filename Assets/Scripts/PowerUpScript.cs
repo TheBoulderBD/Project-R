@@ -71,7 +71,7 @@ public class PowerUp : MonoBehaviour
                     playerScript.SetProjectileSpeed(playerScript.GetProjectileSpeed() + 1f);
                     break;
                 case PowerUpType.IncreaseProjectileDamage:
-                    playerScript.SetProjectileDamage(playerScript.GetProjectileDamage() + 1f);
+                    playerScript.SetProjectileDamage(playerScript.GetProjectileDamage() + 2);
                     break;
                 case PowerUpType.IncreaseProjectileLifetime:
                     playerScript.SetProjectileLifetime(playerScript.GetProjectileLifetime() + 0.5f);

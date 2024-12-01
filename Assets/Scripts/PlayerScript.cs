@@ -14,7 +14,7 @@ public class PlayerScript : MonoBehaviour
     public int playerHealth; // playerHealth of the player
     public int maxHealth = 100;
     public HealthBar healthBar;
-    public float projectileDamage = 1f; // Damage of the projectile
+    public int projectileDamage = 1; // Damage of the projectile
     public float projectileSpeed = 1f;   // Speed of the projectile
     public float projectileLifetime = 1f; // Time before the projectile disappears
     public float shootCooldown = 0.2f;     // Cooldown time between shots in seconds
@@ -145,12 +145,12 @@ public class PlayerScript : MonoBehaviour
         currentCooldown = shootCooldown;
     }
 
-    public float GetProjectileDamage()
+    public int GetProjectileDamage()
     {
         return projectileDamage;
     }
 
-    public void SetProjectileDamage(float damage)
+    public void SetProjectileDamage(int damage)
     {
         projectileDamage = damage;
     }
@@ -224,5 +224,18 @@ public class PlayerScript : MonoBehaviour
                 // Handle death logic here
             }
         }
+
+        if (collision.gameObject.CompareTag("Boss"))
+        {
+            playerHealth -= collision.gameObject.GetComponent<BossScript>().GetHitStrength();
+
+            if (playerHealth < 1)
+            {
+                Debug.LogError("HIT");
+                // Handle death logic here
+            }
+        }
     }
+
+
 }
