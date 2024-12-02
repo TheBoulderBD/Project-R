@@ -15,9 +15,6 @@ public class BossScript : MonoBehaviour
     public int hitStrength = 20;
     public HealthBar healthBar;
 
-    public Sprite deathSprite;
-    public Sprite normalSprite;
-    public Sprite enrageSprite;
     private bool isDead = false;
     private bool isEnraged = false;
 
@@ -31,7 +28,7 @@ public class BossScript : MonoBehaviour
     private Rigidbody2D rb;
 
     public GameObject orbPrefab; // Assign your orb prefab here
-    public float orbCooldown = 1f; // Time between firing orbs
+    public float orbCooldown = 2f; // Time between firing orbs
     private float orbTimer = 0f;
     private int orbCount = 8;
 
@@ -45,7 +42,6 @@ public class BossScript : MonoBehaviour
 
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
-        spriteRenderer.sprite = normalSprite;
     }
 
     void Update()
