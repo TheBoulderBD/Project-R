@@ -1005,15 +1005,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   speed: 1
-  maxHealth: 50
+  maxHealth: 150
   health: 50
   hitStrength: 30
   healthBar: {fileID: 95045194}
-  deathSprite: {fileID: 8915095006512376559, guid: 4c2b7b0ff0207ff4c933b1b4b715019f, type: 3}
   separationRadius: 1
   separationStrength: 0.5
   orbPrefab: {fileID: 4049447724857106697, guid: 0622fcc44723c534ea850e6b91ec7883, type: 3}
-  orbCooldown: 1
+  orbCooldown: 2
 --- !u!95 &584644011
 Animator:
   serializedVersion: 5
