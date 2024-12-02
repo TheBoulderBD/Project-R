@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class BossScript : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class BossScript : MonoBehaviour
     public float orbCooldown = 2f; // Time between firing orbs
     private float orbTimer = 0f;
     private int orbCount = 8;
+
+    public GameObject crownPrefab;
+    public GameObject tutorial;
 
     void Start()
     {
@@ -171,7 +175,24 @@ public class BossScript : MonoBehaviour
         rb.velocity = Vector2.zero;
         rb.isKinematic = true;
         boxCollider.enabled = false;
+
+
+
+        GameObject crownInstance = Instantiate(crownPrefab, transform.position, Quaternion.identity);
+
+        Crown crownScript = crownInstance.GetComponent<Crown>();
+        if (crownScript != null)
+        {
+            crownScript.tutorialOverlay = tutorial; 
+        }
+        else
+        {
+            Debug.LogError("Crown script not found on the instantiated crown prefab!");
+        }
+
+
         Invoke("DestroyEnemy", deathNoise.clip.length);
+
     }
 
     void DestroyEnemy()
@@ -186,6 +207,5 @@ public class BossScript : MonoBehaviour
         animator.SetBool("isEnraged", true);
         orbCount = 12; // Increase orb count
         orbCooldown /= 2; // Reduce cooldown for faster firing
-        Debug.Log("Boss has entered enraged mode!");
     }
 }
