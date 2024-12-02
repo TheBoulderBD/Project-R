@@ -12,11 +12,14 @@ public class BossScript : MonoBehaviour
     private float thrust = 1.5f;
     public int maxHealth = 50;
     public int health;
-    public int hitStrength = 30;
+    public int hitStrength = 20;
     public HealthBar healthBar;
 
     public Sprite deathSprite;
+    public Sprite normalSprite;
+    public Sprite enrageSprite;
     private bool isDead = false;
+    private bool isEnraged = false;
 
     // Parameters for separation
     public float separationRadius = 1.0f; // Distance to maintain from other enemies
@@ -30,6 +33,7 @@ public class BossScript : MonoBehaviour
     public GameObject orbPrefab; // Assign your orb prefab here
     public float orbCooldown = 1f; // Time between firing orbs
     private float orbTimer = 0f;
+    private int orbCount = 8;
 
     void Start()
     {
@@ -41,6 +45,7 @@ public class BossScript : MonoBehaviour
 
         health = maxHealth;
         healthBar.SetMaxHealth(maxHealth);
+        spriteRenderer.sprite = normalSprite;
     }
 
     void Update()
@@ -48,6 +53,11 @@ public class BossScript : MonoBehaviour
         healthBar.setHealth(health);
 
         if (isDead) return;
+
+        if (!isEnraged && health <= maxHealth / 2)
+        {
+            EnterEnragedMode();
+        }
 
         // Calculate distance to the player
         range = Vector2.Distance(transform.position, target.position);
@@ -127,20 +137,13 @@ public class BossScript : MonoBehaviour
             Destroy(collision.gameObject);
             if (health < 1)
             {
-                isDead = true;
-                spriteRenderer.sprite = deathSprite;
-                deathNoise.Play();
-                rb.velocity = Vector2.zero;
-                rb.isKinematic = true;
-                boxCollider.enabled = false;
-                Invoke("DestroyEnemy", deathNoise.clip.length);
+                Die();
             }
         }
     }
 
     void FireOrbsInAllDirections()
     {
-        int orbCount = 8; // Number of directions to fire orbs
         for (int i = 0; i < orbCount; i++)
         {
             float angle = i * (360f / orbCount);
@@ -163,8 +166,30 @@ public class BossScript : MonoBehaviour
         return hitStrength;
     }
 
+    void Die()
+    {
+        isDead = true;
+        Animator animator = GetComponent<Animator>();
+        animator.SetBool("isDead", true);
+        deathNoise.Play();
+        rb.velocity = Vector2.zero;
+        rb.isKinematic = true;
+        boxCollider.enabled = false;
+        Invoke("DestroyEnemy", deathNoise.clip.length);
+    }
+
     void DestroyEnemy()
     {
         Destroy(gameObject);
+    }
+
+    void EnterEnragedMode()
+    {
+        isEnraged = true;
+        Animator animator = GetComponent<Animator>();
+        animator.SetBool("isEnraged", true);
+        orbCount = 12; // Increase orb count
+        orbCooldown /= 2; // Reduce cooldown for faster firing
+        Debug.Log("Boss has entered enraged mode!");
     }
 }

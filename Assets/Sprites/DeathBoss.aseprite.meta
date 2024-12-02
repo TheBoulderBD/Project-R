@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4c2b7b0ff0207ff4c933b1b4b715019f
+guid: 1d9cef2c715a65d47a46d28cd24b647b
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -121,9 +121,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Boss Death_Frame_0
+  - name: DeathBoss
     originalName: 
-    pivot: {x: 0.51428574, y: -0.39130434}
+    pivot: {x: 0.5714286, y: -0.21739131}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     rect:
@@ -132,7 +132,7 @@ ScriptedImporter:
       y: 4
       width: 35
       height: 23
-    spriteID: 7e0084c9ba3d5eb41a97d5b402b309bd
+    spriteID: 27332c783a0b7d14ea37b4399f9d71a8
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -141,57 +141,28 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Boss Death_Frame_1
-    originalName: 
-    pivot: {x: 0.51428574, y: -0.39130434}
-    alignment: 9
-    border: {x: 0, y: 0, z: 0, w: 0}
-    rect:
-      serializedVersion: 2
-      x: 4
-      y: 35
-      width: 35
-      height: 23
-    spriteID: 13ca329a8b44c9340ab785c6c7398438
-    spriteBone: []
-    spriteOutline: []
-    vertices: []
-    spritePhysicsOutline: []
-    indices: 
-    edges: []
-    tessellationDetail: 0
-    uvTransform: {x: 4, y: 35}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
-    guid: 1551642901
-    name: Boss Death
+    guid: -281861623
+    name: DeathBoss
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Boss Death_Frame_0
+    - name: DeathBoss
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 14
-        y: 9
+        x: 3
+        y: 5
         width: 35
         height: 23
-      spriteId: 7e0084c9ba3d5eb41a97d5b402b309bd
-    - name: Boss Death_Frame_1
-      frameIndex: 1
-      additiveSortOrder: 0
-      cellRect:
-        x: 14
-        y: 9
-        width: 35
-        height: 23
-      spriteId: 13ca329a8b44c9340ab785c6c7398438
+      spriteId: 27332c783a0b7d14ea37b4399f9d71a8
     linkedCells: []
     parentIndex: -1
   platformSettings: []
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 64, y: 64}
+  canvasSize: {x: 46, y: 30}
