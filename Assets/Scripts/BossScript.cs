@@ -10,7 +10,7 @@ public class BossScript : MonoBehaviour
     private bool targetCollision = false;
     public float speed = 1.0f;
     private float thrust = 1.5f;
-    public int maxHealth = 500;
+    public int maxHealth = 50;
     public int health;
     public int hitStrength = 30;
     public HealthBar healthBar;
@@ -28,7 +28,7 @@ public class BossScript : MonoBehaviour
     private Rigidbody2D rb;
 
     public GameObject orbPrefab; // Assign your orb prefab here
-    public float orbCooldown = 5f; // Time between firing orbs
+    public float orbCooldown = 1f; // Time between firing orbs
     private float orbTimer = 0f;
 
     void Start()

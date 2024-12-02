@@ -62,16 +62,16 @@ public class PowerUp : MonoBehaviour
             switch (powerUpType)
             {
                 case PowerUpType.IncreasePlayerSpeed:
-                    playerScript.SetPlayerSpeed(playerScript.GetPlayerSpeed() + 1f);
+                    playerScript.SetPlayerSpeed(playerScript.GetPlayerSpeed() + 0.5f);
                     break;
                 case PowerUpType.IncreasePlayerHealth:
-                    playerScript.SetPlayerHealth(playerScript.GetPlayerHealth() + 10);
+                    playerScript.SetPlayerHealth(playerScript.GetPlayerHealth() + 20);
                     break;
                 case PowerUpType.IncreaseProjectileSpeed:
-                    playerScript.SetProjectileSpeed(playerScript.GetProjectileSpeed() + 1f);
+                    playerScript.SetProjectileSpeed(playerScript.GetProjectileSpeed() + 2f);
                     break;
                 case PowerUpType.IncreaseProjectileDamage:
-                    playerScript.SetProjectileDamage(playerScript.GetProjectileDamage() + 2);
+                    playerScript.SetProjectileDamage(playerScript.GetProjectileDamage() + 1);
                     break;
                 case PowerUpType.IncreaseProjectileLifetime:
                     playerScript.SetProjectileLifetime(playerScript.GetProjectileLifetime() + 0.5f);

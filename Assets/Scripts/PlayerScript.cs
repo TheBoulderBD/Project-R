@@ -1,6 +1,8 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 public class PlayerScript : MonoBehaviour
 {
     private float horizontal;
@@ -217,11 +219,10 @@ public class PlayerScript : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy"))
         {
             playerHealth -= collision.gameObject.GetComponent<EnemyScript>().GetHitStrength();
-            
+
             if (playerHealth < 1)
             {
-                Debug.LogError("HIT");
-                // Handle death logic here
+                SceneManager.LoadScene("Main Menu");
             }
         }
 
@@ -231,8 +232,7 @@ public class PlayerScript : MonoBehaviour
 
             if (playerHealth < 1)
             {
-                Debug.LogError("HIT");
-                // Handle death logic here
+                SceneManager.LoadScene("Main Menu");
             }
         }
     }

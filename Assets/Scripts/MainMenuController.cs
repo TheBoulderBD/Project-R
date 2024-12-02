@@ -12,4 +12,12 @@ public class MainMenuController : MonoBehaviour
         // Replace "MainGame" with the name of your main game scene
         SceneManager.LoadScene("Main Game");
     }
+    public void CloseGame()
+    {
+        #if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
+    }
 }
