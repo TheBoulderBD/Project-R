@@ -12,6 +12,8 @@ public class PlayerScript : MonoBehaviour
     public GameObject projectilePrefab;  // The projectile prefab
     public Transform launchPoint;        // The point from where the projectile is launched
 
+    public GameOverScreen gameOverScreen;
+
     public float playerSpeed = 2.0f;
     public int playerHealth; // playerHealth of the player
     public int maxHealth = 100;
@@ -47,6 +49,11 @@ public class PlayerScript : MonoBehaviour
         rb.velocity = new Vector2(horizontal * playerSpeed, vertical * playerSpeed);
 
         healthBar.setHealth(playerHealth);
+
+        if (playerHealth < 1)
+        {
+            GameOver();
+        }
 
         // Only play movement animations if player is not shooting
         if (!animator.GetCurrentAnimatorStateInfo(0).IsName("ShootRight") &&
@@ -220,22 +227,19 @@ public class PlayerScript : MonoBehaviour
         {
             playerHealth -= collision.gameObject.GetComponent<EnemyScript>().GetHitStrength();
 
-            if (playerHealth < 1)
-            {
-                SceneManager.LoadScene("Main Menu");
-            }
+            
         }
 
         if (collision.gameObject.CompareTag("Boss"))
         {
             playerHealth -= collision.gameObject.GetComponent<BossScript>().GetHitStrength();
 
-            if (playerHealth < 1)
-            {
-                SceneManager.LoadScene("Main Menu");
-            }
         }
     }
 
+    public void GameOver()
+    {
+        gameOverScreen.Setup();
+    }
 
 }
